@@ -1,4 +1,4 @@
-from db import Base
+from db import Base, engine
 from sqlalchemy import event
 from sqlalchemy import Column, Integer, String
 from elasticsearch import Elasticsearch
@@ -22,3 +22,5 @@ def after_entry_update(mapper, connection, target):
 
 event.listen(Entry, 'after_insert', after_entry_insert)
 event.listen(Entry, 'after_update', after_entry_insert)
+
+Base.metadata.create_all(engine)
